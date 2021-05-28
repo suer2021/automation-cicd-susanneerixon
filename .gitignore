@@ -1,0 +1,4 @@
+frontend-tests/node_modules/
+backend-tests/node_modules/
+frontend-tests/mochawesome-report/
+backend-tests/mochawesome-report/
