@@ -12,15 +12,15 @@ pipeline {
         stage('Frontend tests') {
             steps {
                 bat '''
-                    cd frontend-project/
+                    cd frontend-tests/
                     npm install && npm run cypress:run
                 '''
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'frontend-project/cypress/videos/**', followSymlinks: false
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'frontend-tests/cypress/videos/**', followSymlinks: false
                 publishHTML([
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: false,
-                    reportDir: 'frontend-project/mochawesome-report',
+                    reportDir: 'frontend-tests/mochawesome-report',
                     reportFiles: 'mochawesome.html',
                     reportName: 'Frontend report',
                     reportTitles: ''
@@ -30,15 +30,15 @@ pipeline {
         stage('Backend tests') {
             steps {
                 bat '''
-                    cd backend-project/
-                    npm install && npm run test:report:regression
+                    cd backend-tests/
+                    npm install && npm run cypress:run
                 '''
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'backend-project/cypress/videos/**', followSymlinks: false
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'backend-tests/cypress/videos/**', followSymlinks: false
                 publishHTML([
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: false,
-                    reportDir: 'backend-project/mochawesome-report',
+                    reportDir: 'backend-tests/mochawesome-report',
                     reportFiles: 'mochawesome.html',
                     reportName: 'Backend report',
                     reportTitles: ''
